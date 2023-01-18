@@ -1,0 +1,10 @@
+certifi @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_5d968ni_yn/croot/certifi_1671487774636/work/certifi
+click @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_croot-quwchbn8/click_1646123324461/work
+Flask @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_9ctftfb254/croot/flask_1671217361609/work
+Flask-SQLAlchemy @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_1748wdxs95/croot/flask-sqlalchemy_1671219130962/work
+greenlet @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_5b9h4voofy/croot/greenlet_1670513245570/work
+itsdangerous @ file:///tmp/build/80754af9/itsdangerous_1621432558163/work
+Jinja2 @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_9fjgzv9ant/croot/jinja2_1666908141308/work
+MarkupSafe @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_12c133f5-0720-4727-9c18-599a3af825723lzwham3/croots/recipe/markupsafe_1654597866058/work
+SQLAlchemy @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_273be9c0-93b1-43af-992e-5f59da1cdc80zjdbgpvr/croots/recipe/sqlalchemy_1657867858621/work
+Werkzeug @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_54t7yp6vfo/croot/werkzeug_1671215998207/work
