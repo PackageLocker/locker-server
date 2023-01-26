@@ -9,5 +9,5 @@ This is the back-end application for the package locker system, which is hosted 
 3. Start server
 
 ```
-gunicorn -w 3 -b 0.0.0.0:8000 'api:create_app()'
+gunicorn -b 0.0.0.0:8000 'api:create_app()'
 ```
