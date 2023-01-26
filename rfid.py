@@ -9,6 +9,7 @@ locker_gpio = {
     2: 38,
     3: 40
 }
+
 # set up GPIO
 GPIO.setmode(GPIO.BOARD)
 for gpio in locker_gpio.values():
@@ -27,20 +28,25 @@ while True:
         # look for id in the db
         res = cursor.execute(
             "select locker_id from packages where student_id = '" + str(id) + "'")
-        locker_id = res.fetchone()
-        if (locker_id):
-            locker_id = locker_id[0]
-            print("locker_id found: #" + str(locker_id))
-            # unlock locker
-            print("unlocking locker #" + str(locker_id))
-            GPIO.output(locker_gpio[locker_id], GPIO.HIGH)
-            sleep(1)
-            GPIO.output(locker_gpio[locker_id], GPIO.LOW)
-            # delete record in db
-            cursor.execute(
-                "delete from packages where student_id = '" + str(id) + "'")
-            connection.commit()
-            print("record deleted: " + str(id))
+        locker_ids = res.fetchall()
+        if (locker_ids):
+            for locker_id in locker_ids:
+                locker_id = locker_id[0]
+                print("locker_id found: #" + str(locker_id))
+                # unlock locker
+                print("unlocking locker #" + str(locker_id))
+                GPIO.output(locker_gpio[locker_id], GPIO.HIGH)
+                sleep(1)
+                GPIO.output(locker_gpio[locker_id], GPIO.LOW)
+                # delete record in db
+                cursor.execute(
+                    "update packages " +
+                    "set package_id = '', name = '', student_id = '', email = '', available=True " +
+                    "where locker_id = '" + str(locker_id) + "'"
+                )
+                connection.commit()
+                print(
+                    "[" + str(id) + "] record deleted from locker#" + str(locker_id))
         else:
             print("locker_id not found!")
     except Exception as e:

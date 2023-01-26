@@ -8,14 +8,12 @@ main = Blueprint('main', __name__)
 @main.route('/new', methods=['POST'])
 def add_package():
     package_data = request.get_json()
-    new_package = Package(
-        locker_id=package_data['locker_id'],
-        package_id=package_data['package_id'],
-        name=package_data['name'],
-        student_id=package_data['student_id'],
-        email=package_data['email']
-    )
-    db.session.add(new_package)
+    package = db.get_or_404(Package, package_data["locker_id"])
+    package.package_id = package_data['package_id']
+    package.name = package_data['name']
+    package.student_id = package_data['student_id']
+    package.email = package_data['email']
+    package.available = False
     db.session.commit()
 
     return 'Done', 201
@@ -32,17 +30,22 @@ def packages():
             'package_id': package.package_id,
             'name': package.name,
             'student_id': package.student_id,
-            'email': package.email
+            'email': package.email,
+            'available': package.available
         })
 
-    return jsonify({'packages': packages}), 200
+    return jsonify(packages), 200
 
 
 @main.route('/delete', methods=["DELETE"])
 def update_package():
     package_data = request.get_json()
     package = db.get_or_404(Package, package_data["locker_id"])
-    db.session.delete(package)
+    package.package_id = ""
+    package.name = ""
+    package.student_id = ""
+    package.email = ""
+    package.available = True
     db.session.commit()
 
     return 'Done', 201
