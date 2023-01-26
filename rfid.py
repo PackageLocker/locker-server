@@ -10,7 +10,7 @@ locker_gpio = {
     3: 40
 }
 # set up GPIO
-GPIO.setmode(GPIO.BCM)
+GPIO.setmode(GPIO.BOARD)
 for gpio in locker_gpio.values():
     GPIO.setup(gpio, GPIO.OUT)
 
@@ -27,9 +27,10 @@ while True:
         # look for id in the db
         res = cursor.execute(
             "select locker_id from packages where student_id = '" + str(id) + "'")
-        locker_id = res.fetchone()[0]
+        locker_id = res.fetchone()
         if (locker_id):
-            print("locker_id found: " + str(locker_id))
+            locker_id = locker_id[0]
+            print("locker_id found: #" + str(locker_id))
             # unlock locker
             print("unlocking locker #" + str(locker_id))
             GPIO.output(locker_gpio[locker_id], GPIO.HIGH)
