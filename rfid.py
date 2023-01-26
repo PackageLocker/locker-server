@@ -40,7 +40,7 @@ while True:
             cursor.execute(
                 "delete from packages where student_id = '" + str(id) + "'")
             connection.commit()
-            print("record deleted" + str(id))
+            print("record deleted: " + str(id))
         else:
             print("locker_id not found!")
     except Exception as e:
