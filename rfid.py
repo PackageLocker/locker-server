@@ -22,7 +22,7 @@ while True:
         print("id: " + id)
         # look for id in the db
         res = cursor.execute(
-            "select locker_id where student_id = '" + id + "'")
+            "select locker_id from packages where student_id = '" + id + "'")
         locker_id = res.fetchone()
         if (locker_id):
             print("locker_id found: " + locker_id)
@@ -37,7 +37,9 @@ while True:
             connection.commit()
         else:
             print("locker_id not found!")
-    except:
+    except Exception as e:
         print("something went wrong...")
-    finally:
-        GPIO.cleanup()
+        print(e)
+        break
+
+GPIO.cleanup()
