@@ -9,6 +9,10 @@ locker_gpio = {
     2: 38,
     3: 40
 }
+# set up GPIO
+GPIO.setmode(GPIO.BCM)
+for gpio in locker_gpio.values():
+    GPIO.setup(gpio, GPIO.OUT)
 
 # set up card reader and db management
 reader = SimpleMFRC522()
