@@ -19,10 +19,10 @@ while True:
     try:
         # scan id
         id, text = reader.read()
-        print("id: " + id)
+        print("id: " + str(id))
         # look for id in the db
         res = cursor.execute(
-            "select locker_id from packages where student_id = '" + id + "'")
+            "select locker_id from packages where student_id = '" + str(id) + "'")
         locker_id = res.fetchone()
         if (locker_id):
             print("locker_id found: " + locker_id)
@@ -33,7 +33,7 @@ while True:
             GPIO.output(locker_gpio[locker_id], GPIO.LOW)
             # delete record in db
             cursor.execute(
-                "delete from packages where student_id = '" + id + "'")
+                "delete from packages where student_id = '" + str(id) + "'")
             connection.commit()
         else:
             print("locker_id not found!")
