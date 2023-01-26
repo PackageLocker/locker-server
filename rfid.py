@@ -23,11 +23,11 @@ while True:
         # look for id in the db
         res = cursor.execute(
             "select locker_id from packages where student_id = '" + str(id) + "'")
-        locker_id = res.fetchone()
+        locker_id = res.fetchone()[0]
         if (locker_id):
-            print("locker_id found: " + locker_id)
+            print("locker_id found: " + str(locker_id))
             # unlock locker
-            print("unlocking locker #" + locker_id)
+            print("unlocking locker #" + str(locker_id))
             GPIO.output(locker_gpio[locker_id], GPIO.HIGH)
             sleep(1)
             GPIO.output(locker_gpio[locker_id], GPIO.LOW)
