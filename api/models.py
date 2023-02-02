@@ -10,3 +10,4 @@ class Package(db.Model):
     student_id = db.Column(db.String(20))
     email = db.Column(db.String(50))
     available = db.Column(db.Boolean())
+    timestamp = db.Column(db.Integer)

@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from . import db
 from .models import Package
+from datetime import datetime
 
 main = Blueprint('main', __name__)
 
@@ -14,6 +15,7 @@ def add_package():
     package.student_id = package_data['student_id']
     package.email = package_data['email']
     package.available = False
+    package.timestamp = package_data['timestamp']
     db.session.commit()
 
     return 'Done', 201
@@ -31,7 +33,8 @@ def packages():
             'name': package.name,
             'student_id': package.student_id,
             'email': package.email,
-            'available': package.available
+            'available': package.available,
+            'timestamp': package.timestamp
         })
 
     return jsonify(packages), 200
@@ -46,6 +49,7 @@ def update_package():
     package.student_id = ""
     package.email = ""
     package.available = True
+    package.timestamp = 0
     db.session.commit()
 
-    return 'Done', 201
+    return 'Done', 200
