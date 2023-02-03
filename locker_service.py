@@ -5,7 +5,7 @@ import locker
 
 
 def main():
-    locker.gpioSetup()
+    # locker.gpioSetup()
     reader = SimpleMFRC522()
     connection = sqlite3.connect('instance/database.db')
     cursor = connection.cursor()
@@ -37,7 +37,7 @@ def main():
             print("something went wrong...")
             print(e)
             break
-    locker.cleanup()
+    # locker.cleanup()
 
 
 if __name__ == "__main__":

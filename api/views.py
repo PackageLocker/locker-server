@@ -61,6 +61,6 @@ def unlock_locker():
     locker.gpioSetup()
     data = request.get_json()
     locker.unlock(int(data['locker_id']))
-    locker.cleanup()
+    # locker.cleanup()
 
     return 'Done', 200
