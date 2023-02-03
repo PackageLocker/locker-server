@@ -20,3 +20,7 @@ def unlock(locker_id):
     GPIO.output(LOCKER_GPIO[locker_id], GPIO.HIGH)
     sleep(2)
     GPIO.output(LOCKER_GPIO[locker_id], GPIO.LOW)
+
+
+def cleanup():
+    GPIO.cleanup()

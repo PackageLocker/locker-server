@@ -41,7 +41,7 @@ def main():
             print("something went wrong...")
             print(e)
             break
-    GPIO.cleanup()
+    locker.cleanup()
 
 
 if __name__ == "__main__":
