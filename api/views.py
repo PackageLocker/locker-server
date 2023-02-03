@@ -58,7 +58,9 @@ def update_package():
 
 @main.route('/unlock', methods=['POST'])
 def unlock_locker():
+    locker.gpioSetup()
     data = request.get_json()
-    locker.unlock(data['package_id'])
+    locker.unlock(data['locker_id'])
+    locker.cleanup()
 
     return 'Done', 200
