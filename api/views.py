@@ -60,7 +60,7 @@ def update_package():
 def unlock_locker():
     locker.gpioSetup()
     data = request.get_json()
-    locker.unlock(data['locker_id'])
+    locker.unlock(int(data['locker_id']))
     locker.cleanup()
 
     return 'Done', 200
