@@ -12,5 +12,11 @@ Follow this [blog](https://pimylifeup.com/raspberry-pi-rfid-rc522/) to set up th
 3. Start server
 
 ```
-gunicorn -w 3 -b 0.0.0.0:8000 'api:create_app()'
+gunicorn -w 3 -b 127.0.0.1:8000 'api:create_app()'
+```
+
+4. Run locker_service
+
+```
+python locker_service.py
 ```

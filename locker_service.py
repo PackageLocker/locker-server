@@ -1,11 +1,9 @@
-# import RPi.GPIO as GPIO
 from mfrc522 import SimpleMFRC522
 import sqlite3
 import locker
 
 
 def main():
-    # locker.gpioSetup()
     reader = SimpleMFRC522()
     connection = sqlite3.connect('instance/database.db')
     cursor = connection.cursor()
@@ -37,7 +35,6 @@ def main():
             print("something went wrong...")
             print(e)
             break
-    # locker.cleanup()
 
 
 if __name__ == "__main__":

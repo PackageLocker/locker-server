@@ -9,12 +9,6 @@ LOCKER_GPIO = {
 }
 
 
-# def gpioSetup():
-#     GPIO.setmode(GPIO.BOARD)
-#     for gpio in LOCKER_GPIO.values():
-#         GPIO.setup(gpio, GPIO.OUT)
-
-
 def unlock(locker_id):
     GPIO.setmode(GPIO.BOARD)
     print("unlocking locker #" + str(locker_id))
@@ -23,7 +17,3 @@ def unlock(locker_id):
     sleep(2)
     GPIO.output(LOCKER_GPIO[locker_id], GPIO.LOW)
     GPIO.cleanup()
-
-
-# def cleanup():
-#     GPIO.cleanup()
