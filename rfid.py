@@ -4,15 +4,11 @@ import sqlite3
 import locker
 
 
-def setup():
+def main():
     locker.gpioSetup()
     reader = SimpleMFRC522()
     connection = sqlite3.connect('instance/database.db')
     cursor = connection.cursor()
-
-
-def main():
-    setup()
     while True:
         try:
             # scan id
