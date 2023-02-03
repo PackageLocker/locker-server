@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from . import db
 from .models import Package
 from datetime import datetime
+import locker
 
 main = Blueprint('main', __name__)
 
@@ -51,5 +52,13 @@ def update_package():
     package.available = True
     package.timestamp = 0
     db.session.commit()
+
+    return 'Done', 200
+
+
+@main.route('/unlock', methods=['POST'])
+def unlock_locker():
+    data = request.get_json()
+    locker.unlock(data['package_id'])
 
     return 'Done', 200
