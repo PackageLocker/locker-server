@@ -19,6 +19,8 @@ def add_package():
     package.timestamp = package_data['timestamp']
     db.session.commit()
 
+    locker.unlock(int(package_data['locker_id']))
+
     return 'Done', 201
 
 
