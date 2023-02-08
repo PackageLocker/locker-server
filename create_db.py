@@ -2,7 +2,7 @@ from api.models import Package
 from api import db, create_app
 from datetime import datetime
 
-LOCKER_NUM = 10
+LOCKER_NUM = 7
 
 with create_app().app_context():
     db.create_all()
