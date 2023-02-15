@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request
 from . import db
 from .models import Package
 from datetime import datetime
-from .email import Email
+from .notification import Notification
 # import locker
 
 main = Blueprint('main', __name__)
@@ -19,7 +19,7 @@ def add_package():
     package.timestamp = package_data['timestamp']
     db.session.commit()
 
-    Email(package_data['email']) # Send email to student
+    Notification(package_data['email']) # Send email to student
 
     # locker.unlock(int(package_data['locker_id']))
     return 'Done', 201
