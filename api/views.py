@@ -1,13 +1,11 @@
-from flask import Flask, Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request
 from . import db
 from .models import Package
 from datetime import datetime
-from flask_mail import Mail, Message
+from .email import Email
 # import locker
 
 main = Blueprint('main', __name__)
-app = Flask(__name__)
-mail = Mail(app)
 
 @main.route('/new', methods=['POST'])
 def add_package():
@@ -21,9 +19,7 @@ def add_package():
     package.timestamp = package_data['timestamp']
     db.session.commit()
 
-    msg = Message('Hello', sender = 'knightpickup@gmail.com', recipients = package_data['email'])
-    msg.body = "Hello Flask message sent from Flask-Mail"
-    mail.send(msg)
+    Email(package_data['email']) # Send email to student
 
     # locker.unlock(int(package_data['locker_id']))
     return 'Done', 201
