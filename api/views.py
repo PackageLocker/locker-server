@@ -1,11 +1,26 @@
 from flask import Blueprint, jsonify, request
 from . import db
-from .models import Package
+from .models import Package, User
 from datetime import datetime
 from .notification import Notification
 # import locker
+from werkzeug.security import generate_password_hash, check_password_hash
 
 main = Blueprint('main', __name__)
+
+@main.route('/user', methods=['POST'])
+def create_user():
+    data = request.get_json()
+
+    hashed_password = generate_password_hash(data['password'], method='sha256')
+
+    new_user = User(username=data['username'], password=hashed_password)
+
+    db.session.add(new_user)
+    db.session.commit()
+
+    return 'New user created', 201
+
 
 @main.route('/new', methods=['POST'])
 def add_package():
