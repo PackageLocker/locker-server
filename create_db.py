@@ -1,6 +1,6 @@
-from api.models import Package
+from api.models import Package, User
 from api import db, create_app
-from datetime import datetime
+from werkzeug.security import generate_password_hash, check_password_hash
 
 LOCKER_NUM = 7
 
@@ -18,6 +18,11 @@ with create_app().app_context():
         )
         db.session.add(new_package)
         db.session.commit()
+
+    hashed_password = generate_password_hash('4admin', method='sha256')
+    root_user = User(username='admin', password=hashed_password)
+    db.session.add(root_user)
+    db.session.commit()
 
 # To view the datebase:
 # sqlite3 instance/database.db
