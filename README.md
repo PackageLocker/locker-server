@@ -11,14 +11,14 @@ Follow this [blog](https://pimylifeup.com/raspberry-pi-rfid-rc522/) to set up th
 
 3. Start server 
 
-a. For OSX/Linux
-```
-gunicorn -w 3 -b 127.0.0.1:8000 'api:create_app()'
-```
-b. For Windows
-```
-waitress-serve --host 127.0.0.1 --port=8000 api:create_app()
-```
+  a. For OSX/Linux
+  ```
+  gunicorn -w 3 -b 127.0.0.1:8000 'api:create_app()'
+  ```
+  b. For Windows
+  ```
+  waitress-serve --host 127.0.0.1 --port=8000 api:create_app()
+  ```
 
 4. Run locker_service
 
