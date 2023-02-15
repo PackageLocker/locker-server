@@ -11,7 +11,7 @@ Follow this [blog](https://pimylifeup.com/raspberry-pi-rfid-rc522/) to set up th
 
 3. Start server (OS specific)
 
-    a. For OSX/Linux
+    a. For OS X/Linux
     ```
     gunicorn -w 3 -b 127.0.0.1:8000 'api:create_app()'
     ```
