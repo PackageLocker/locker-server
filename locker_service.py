@@ -32,7 +32,7 @@ def main():
             else:
                 print("locker_id not found!")
         except Exception as e:
-            print("something went wrong...")
+            print("something went wrong in locker_service...")
             print(e)
             break
 

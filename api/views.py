@@ -2,10 +2,10 @@ from flask import Blueprint, jsonify, request
 from . import db
 from .models import Package
 from datetime import datetime
-import locker
+from .notification import Notification
+# import locker
 
 main = Blueprint('main', __name__)
-
 
 @main.route('/new', methods=['POST'])
 def add_package():
@@ -19,8 +19,9 @@ def add_package():
     package.timestamp = package_data['timestamp']
     db.session.commit()
 
-    locker.unlock(int(package_data['locker_id']))
+    Notification(package_data['email']) # Send email to student
 
+    # locker.unlock(int(package_data['locker_id']))
     return 'Done', 201
 
 
@@ -61,6 +62,6 @@ def update_package():
 @main.route('/unlock', methods=['POST'])
 def unlock_locker():
     data = request.get_json()
-    locker.unlock(int(data['locker_id']))
+    # locker.unlock(int(data['locker_id']))
 
     return 'Done', 200
