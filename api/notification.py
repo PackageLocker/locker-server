@@ -6,7 +6,7 @@ from email.mime.text import MIMEText
 def Notification(email_receiver):
     # Login Information
     email_sender = 'knightpickup@gmail.com'
-    email_password = 'gdprlrunqkmcydin'
+    email_password = ''
 
     # Setup for HTML Email
     email_message = MIMEMultipart()
