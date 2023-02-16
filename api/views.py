@@ -19,7 +19,6 @@ def token_required(f):
 
         if 'x-access-token' in request.headers:
             token = request.headers['x-access-token']
-            print(token)
 
         if not token:
             return 'Token is missing', 401
@@ -50,6 +49,7 @@ def get_users():
 
 
 @main.route('/user', methods=['POST'])
+@token_required
 def create_user():
     data = request.get_json()
 
@@ -64,6 +64,7 @@ def create_user():
 
 
 @main.route('/user/<id>', methods=['DELETE'])
+@token_required
 def delete_user(id):
     user = User.query.filter_by(id=id).first()
 
@@ -100,6 +101,7 @@ def login():
 
 
 @main.route('/new', methods=['POST'])
+@token_required
 def add_package():
     package_data = request.get_json()
     package = db.get_or_404(Package, package_data["locker_id"])
@@ -118,6 +120,7 @@ def add_package():
 
 
 @main.route('/packages', methods=['GET'])
+@token_required
 def packages():
     package_list = Package.query.all()
     packages = []
@@ -137,6 +140,7 @@ def packages():
 
 
 @main.route('/delete', methods=["DELETE"])
+@token_required
 def update_package():
     package_data = request.get_json()
     package = db.get_or_404(Package, package_data["locker_id"])
@@ -152,6 +156,7 @@ def update_package():
 
 
 @main.route('/unlock', methods=['POST'])
+@token_required
 def unlock_locker():
     data = request.get_json()
     # locker.unlock(int(data['locker_id']))
