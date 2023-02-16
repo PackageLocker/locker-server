@@ -34,6 +34,19 @@ def create_user():
     return 'New user created', 201
 
 
+@main.route('/user/<id>', methods=['DELETE'])
+def delete_user(id):
+    user = User.query.filter_by(id=id).first()
+
+    if not user:
+        return 'User not found!'
+
+    db.session.delete(user)
+    db.session.commit()
+
+    return 'User deleted', 200
+
+
 @main.route('/new', methods=['POST'])
 def add_package():
     package_data = request.get_json()
