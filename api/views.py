@@ -1,10 +1,12 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, make_response, current_app
 from . import db
 from .models import Package, User
 from datetime import datetime
 from .notification import Notification
 # import locker
 from werkzeug.security import generate_password_hash, check_password_hash
+import jwt
+import datetime
 
 main = Blueprint('main', __name__)
 
@@ -19,6 +21,7 @@ def get_users():
             'password': user.password
         })
     return jsonify(users_list), 200
+
 
 @main.route('/user', methods=['POST'])
 def create_user():
@@ -39,12 +42,35 @@ def delete_user(id):
     user = User.query.filter_by(id=id).first()
 
     if not user:
-        return 'User not found!'
+        return 'No user found!'
 
     db.session.delete(user)
     db.session.commit()
 
     return 'User deleted', 200
+
+
+@main.route('/login')
+def login():
+    auth = request.authorization
+
+    if not auth or not auth.username or not auth.password:
+        return make_response('Could not verify', 401, {'WWW-Authenticate': 'Basic realm="Login required!"'})
+
+    user = User.query.filter_by(username=auth.username).first()
+
+    if not user:
+        return 'No user found!'
+
+    if check_password_hash(user.password, auth.password):
+        token = jwt.encode({
+            'id': user.id,
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)},
+            current_app.config['SECRET_KEY'])
+
+        return jsonify({'token': token})
+
+    return make_response('Could not verify', 401, {'WWW-Authenticate': 'Basic realm="Login required!"'})
 
 
 @main.route('/new', methods=['POST'])
@@ -59,7 +85,7 @@ def add_package():
     package.timestamp = package_data['timestamp']
     db.session.commit()
 
-    Notification(package_data['email']) # Send email to student
+    Notification(package_data['email'])  # Send email to student
 
     # locker.unlock(int(package_data['locker_id']))
     return 'Done', 201
