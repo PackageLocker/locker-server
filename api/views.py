@@ -7,10 +7,36 @@ from .notification import Notification
 from werkzeug.security import generate_password_hash, check_password_hash
 import jwt
 import datetime
+from functools import wraps
 
 main = Blueprint('main', __name__)
 
+
+def token_required(f):
+    @wraps(f)
+    def decorated(*arg, **kwargs):
+        token = None
+
+        if 'x-access-token' in request.headers:
+            token = request.headers['x-access-token']
+            print(token)
+
+        if not token:
+            return 'Token is missing', 401
+
+        try:
+            data = jwt.decode(
+                token, current_app.config['SECRET_KEY'], algorithms=['HS256'])
+        except:
+            return 'Token is invalid', 401
+
+        return f(*arg, **kwargs)
+
+    return decorated
+
+
 @main.route('/user', methods=['GET'])
+@token_required
 def get_users():
     users = User.query.all()
     users_list = []
@@ -64,9 +90,9 @@ def login():
 
     if check_password_hash(user.password, auth.password):
         token = jwt.encode({
-            'id': user.id,
             'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)},
-            current_app.config['SECRET_KEY'])
+            current_app.config['SECRET_KEY']
+        )
 
         return jsonify({'token': token})
 
