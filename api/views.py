@@ -8,6 +8,18 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 main = Blueprint('main', __name__)
 
+@main.route('/user', methods=['GET'])
+def get_users():
+    users = User.query.all()
+    users_list = []
+    for user in users:
+        users_list.append({
+            'id': user.id,
+            'username': user.username,
+            'password': user.password
+        })
+    return jsonify(users_list), 200
+
 @main.route('/user', methods=['POST'])
 def create_user():
     data = request.get_json()
