@@ -1,112 +1,177 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Document</title>
-        <style>
-            @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;1,500&display=swap');
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Knight Pickup</title>
+<style type="text/css">
+	@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@200&display=swap');
+	body {
+		margin: 0;
+	}
+	table {
+		border-spacing: 0;
+	}
+	td {
+		padding: 0;
+	}
+	img {
+		border: 0;
+	}
 
-            * {
-                margin: 0;
-                padding: 0;
-                border: 0;
-            }
+    .wrapper {
+        width: 100%;
+        table-layout: fixed;
+        background-color: rgb(221, 221, 221);
+        padding-bottom: 60px;
+        font-family: sans-serif;
+        color: #4a4a4a;
+        box-shadow: 0 0 25px rgb(0, 0, 0, .15);
+        text-align: center;
+    }
 
-            body {
-                font-family: 'IBM Plex Sans', sans-serif;
-                font-size: 19px;
-                line-height: 1.5;
-                color: #333;
-                background-color: #dddddd;
-                max-width: 800px;
-                margin: 0 auto;
-                padding: 3%;
-            }
+    .main {
+        width: 100%;
+        max-width: 600px;
+        background-color: #fff;
+    }
 
-            img {
-                max-width: 100%;
-                margin: 10%;
-                padding: 3%;
-            }
+    .two-columns {
+        font-size: 0;
+    }
 
-            header {
-                width: 98%;
-            }
+    .two-columns .column {
+        width: 100%;
+        max-width: 300px;
+        display: inline-block;
+        vertical-align: top;
+    }
+    
+    .logo {
+        padding: 0 70px 0;
+    }
 
-            #logo {
-                max-width: 200px;
-            }
+    h3 {
+        font-family: 'Roboto Condensed', sans-serif;
+        font-size: 28px;
+    }
 
-            #wrapper {
-                background-color: #ffffff;
-                padding: 2%;
-                border-radius: 10px;
-            }
+    .para {
+        font-family: 'Raleway', sans-serif;
+    }
 
-            h1, p {
-                margin: 3%;
-            }
+    .foot {
+        font-family: 'Mulish', serif;
+        font-size: 14px;
+        color: #fff;
+    }
 
-            .button {
-                float: right;
-                margin: 0 2% 4% 0;
-                background-color: rgb(134, 24, 24);
-                text-decoration: none;
-                font-weight: 800;
-                color: #dad72a;
-                padding:  8px 16px;
-                margin: 8px;
-                border-radius: 8px;
-                letter-spacing: 1px;
-            }
+    .button {
+        display: inline-block;
+        background-color: rgb(126, 40, 40);
+        color: rgb(255, 255, 255);
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: bold;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
 
-            hr {
-                height: 1px;
-                background-color: #000000;
-                clear: both;
-                width: 96%;
-                margin: 0 auto;
-            }
-        </style>
-    </head>
-    <body>
-        <div id="wrapper">
-            <header>
-                <div class="one-col">
-                    <h1>Your package is ready for pickup!</h1>
+</style>
+</head>
+<body>
 
-                    <p>
-                        Please proceed to the front lobby to pick up your package. 
-                    </p>
+	<center class="wrapper">
 
-                    <p>
-                        To open the locker, scan your Calvin Student ID at the RFID 
-                        scanner located on the side of the locker.
-                    </p>
+		<table class="main" width="100%">
 
-                    <p>If the correct locker does not open, or if other issues occur, 
-                        please contact Team Knight Pickup.
-                    </p>
+<!-- BORDER -->
+            <tr>
+                <td height="8" style="background-color: black;"></td>
+            </tr>
+			
+<!-- LOGO -->
+			<!-- <tr>
+                <td style="padding: 14px 0 0;">
+                    <table width="100%">
 
-                    <hr id="line"><hr />
+                        <tr>
+                            <td class="two-columns">
 
-                    <footer>
-                        <a href="mailto: teamknightpickup@gmail.com", class="button">Contact Support</a>
-                        <p id="contact">
-                            <strong>Calvin University</strong><br />
-                            3201 Burton Street SE<br />
-                            Grand Rapids, MI 49546-4388<br />
-                            <a href="mailto: teamknightpickup@gmail.com">teamknightpickup@gmail.com</a><br />
-                            (616) 526-6154
-                        </p>
-                    </footer>
-                </div>
-                <div id="logo">
-                    <img src="https://calvin.edu/dotAsset/c223e958-2bec-4c04-8949-644591626f1c.png" alt="">
-                </div>
-            </header>
-        </div>
-    </body>
+                                <table class="column">
+                                    <tr>
+                                        <td class="logo">
+                                            <a href=""><img src="https://calvin.edu/dotAsset/afbb399e-bdf4-454a-9fe1-ca4a2476f7b3.png" 
+                                                alt="Team Knight Pickup" title="Calvin University"
+                                                width="150"></a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+
+                    </table>
+                </td>
+            </tr> -->
+<!-- TITLE, TEXT & BUTTON -->
+            <tr>
+                <td style="padding: 5px;">
+                    <table width="100%">
+
+                        <tr>
+                            <td>
+                                <h3>Package Ready for Pickup!</h3>
+                                <p class="para">Your package is ready for pickup in the Knight Pickup Package Locker. Please proceed to the lobby of your dorm to pickup your package.</p>
+                                <p class="para">To unlock the locker, scan your Calvin Student ID at the RFID scanner on the side of the locker.</p>
+                                <p class="para">If the locker does not open, please contact Team Knight Pickup.</p>
+                                <a href="mailto: teamknightpickup@gmail.com" class="button" >Contact Support</a>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+			
+<!-- BORDER -->
+            <tr>
+                <td height="2" style="background-color: black;"></td>
+            </tr>
+			
+<!-- FOOTER -->
+            <tr>
+                <td style="background-color: rgb(126, 40, 40); color: #fff;">
+                    <table width="100%">
+
+                        <tr>
+                            <td style="padding: 45px 20px;">
+                                <a href=""><img src="https://calvin.edu/dotAsset/5d3b4bfe-1a01-4182-83ef-a9e351915cbc.png" alt=""
+                                    width="260"></a>
+                                <p class="foot" style="padding: 5px 0 3px; font-weight: bold;">Team Knight Pickup</p>
+                                <a href="mailto: teamknightpickup@gmail.com" style="color: #dfb913;">teamknightpickup@gmail.com</a>
+                                <p class="foot">Calvin University</p>
+                                <p class="foot">3201 Burton St. SE</p>
+                                <p class="foot">Grand Rapids, MI 49546-4388</p>
+                            </td>
+                        </tr>
+
+                    </table>
+                </td>
+            </tr>
+			
+<!-- BORDER -->
+			
+<!-- TWO COLUMN SECTION -->
+			
+<!-- FOOTER SECTION -->
+			
+
+		</table> <!-- End Main Class -->
+
+	</center> <!-- End Wrapper -->
+
+</body>
 </html>
