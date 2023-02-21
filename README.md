@@ -7,7 +7,7 @@ Follow this [blog](https://pimylifeup.com/raspberry-pi-rfid-rc522/) to set up th
 ## To run the server
 1. Clone the repo and install required packages `pip install -r requirements.txt`
 
-2. (One time on each Pi) Create a database `python create_db.py`
+2. (One time on each Pi) Create a database `python create_db.py`, set up environment variables `LOCKER_SECRET_KEY` and `EMAIL_KEY`
 
 3. Start server (OS specific)
 
