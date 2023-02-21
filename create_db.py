@@ -23,7 +23,3 @@ with create_app().app_context():
     root_user = User(username='admin', password=hashed_password)
     db.session.add(root_user)
     db.session.commit()
-
-# To view the datebase:
-# sqlite3 instance/database.db
-# SELECT * from packages
