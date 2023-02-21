@@ -77,7 +77,7 @@ def delete_user(id):
     return 'User deleted', 200
 
 
-@main.route('/login')
+@main.route('/auth', methods=['POST'])
 def login():
     auth = request.authorization
 
@@ -87,7 +87,7 @@ def login():
     user = User.query.filter_by(username=auth.username).first()
 
     if not user:
-        return 'No user found!'
+        return make_response('Could not verify', 401, {'WWW-Authenticate': 'Basic realm="Login required!"'})
 
     if check_password_hash(user.password, auth.password):
         token = jwt.encode({
