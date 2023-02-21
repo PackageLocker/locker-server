@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request, make_response, current_app
 from . import db
 from .models import Package, User
 from datetime import datetime
-from .notification import Notification
+from .notification import notification
 import locker
 from werkzeug.security import generate_password_hash, check_password_hash
 import jwt
@@ -113,7 +113,7 @@ def add_package():
     package.timestamp = package_data['timestamp']
     db.session.commit()
 
-    Notification(package_data['email'])  # Send email to student
+    notification(package_data['email'])  # Send email to student
 
     locker.unlock(int(package_data['locker_id']))
     return 'Done', 201

@@ -2,12 +2,12 @@ import os
 from email.message import EmailMessage
 import ssl, smtplib
 from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText 
+from email.mime.text import MIMEText
 
-def Notification(email_receiver):
+def notification(email_receiver):
     # Login Information
     email_sender = 'teamknightpickup@gmail.com'
-    email_password = os.environ.get('email_password')
+    email_password = os.environ.get('EMAIL_KEY')
 
     # Setup for HTML Email
     email_message = MIMEMultipart()
