@@ -17,7 +17,7 @@ Follow this [blog](https://pimylifeup.com/raspberry-pi-rfid-rc522/) to set up th
     ```
     b. For Windows
     ```
-    waitress-serve --host 127.0.0.1 --port=8000 api:create_app()
+    waitress-serve --host 127.0.0.1 --port=8000 api:create_app
     ```
 
 4. Run locker_service
