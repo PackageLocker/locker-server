@@ -96,6 +96,8 @@ def login():
         )
 
         return jsonify({'token': token})
+    else:
+        return 'Could not verify username or password', 401
 
     return 'Could not verify', 401
 
