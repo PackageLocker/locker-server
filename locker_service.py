@@ -5,8 +5,7 @@ import locker
 
 def main():
     reader = SimpleMFRC522()
-    connection = sqlite3.connect(
-        '/home/locker1/locker-server/instance/database.db')
+    connection = sqlite3.connect('instance/database.db')
     cursor = connection.cursor()
     while True:
         try:
