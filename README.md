@@ -68,6 +68,7 @@ python locker_service.py
 	[Unit]
 	Description=Locker Scanner Service
 	After=multi-user.target
+    Restart=always
 
 	[Service]
 	User=pi
