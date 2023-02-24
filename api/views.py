@@ -3,7 +3,7 @@ from . import db
 from .models import Package, User
 from datetime import datetime
 from .notification import notification
-import locker
+# import locker
 from werkzeug.security import generate_password_hash, check_password_hash
 import jwt
 import datetime
@@ -115,7 +115,7 @@ def add_package():
 
     notification(package_data['email'])  # Send email to student
 
-    locker.unlock(int(package_data['locker_id']))
+    # locker.unlock(int(package_data['locker_id']))
     return 'Done', 201
 
 
@@ -159,6 +159,6 @@ def update_package():
 @token_required
 def unlock_locker():
     data = request.get_json()
-    locker.unlock(int(data['locker_id']))
+    # locker.unlock(int(data['locker_id']))
 
     return 'Done', 200
