@@ -8,6 +8,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import jwt
 import datetime
 from functools import wraps
+import gspread
 
 main = Blueprint('main', __name__)
 
@@ -112,6 +113,10 @@ def add_package():
     package.available = False
     package.timestamp = package_data['timestamp']
     db.session.commit()
+
+    # update google sheet
+    wks = gspread.service_account().open("Global Database").sheet1
+    wks.insert_row(values=None, index=1)
 
     notification(package_data['email'])  # Send email to student
 
