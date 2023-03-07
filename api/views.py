@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request, make_response, current_app
 from . import db
 from .models import Package, User
 from datetime import datetime
+import datetime
 from .notification import notification
 # import locker
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -157,6 +158,12 @@ def update_package():
     package.available = True
     package.timestamp = 0
     db.session.commit()
+
+    # update google sheet
+    wks = gspread.service_account().open("Global Database").sheet1
+    wks.insert_row(values=None, index=2)
+    wks.update('A2', [[datetime.now().strftime("%m/%d/%Y, %H:%M:%S"), package_data["locker_id"],
+                       package_data['name'], package_data['student_id'], package_data['email'], "UPDATED"]])
 
     return 'Done', 200
 
