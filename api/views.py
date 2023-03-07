@@ -6,7 +6,6 @@ from .notification import notification
 # import locker
 from werkzeug.security import generate_password_hash, check_password_hash
 import jwt
-import datetime
 from functools import wraps
 import gspread
 
@@ -116,7 +115,9 @@ def add_package():
 
     # update google sheet
     wks = gspread.service_account().open("Global Database").sheet1
-    wks.insert_row(values=None, index=1)
+    wks.insert_row(values=None, index=2)
+    wks.update('A2', [[datetime.now().strftime("%m/%d/%Y, %H:%M:%S"), package_data["locker_id"],
+                       package_data['name'], package_data['student_id'], package_data['email'], "DELIVERED"]])
 
     notification(package_data['email'])  # Send email to student
 
