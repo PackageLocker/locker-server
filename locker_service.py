@@ -2,7 +2,6 @@ from mfrc522 import SimpleMFRC522
 import sqlite3
 import locker
 
-
 def main():
     reader = SimpleMFRC522()
     connection = sqlite3.connect('instance/database.db')
