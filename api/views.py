@@ -113,11 +113,15 @@ def add_package():
     package.email = package_data['email']
     package.available = False
     package.timestamp = package_data['timestamp']
-    db.session.commit()
 
-    notification(package_data['email'])  # Send email to student
+    try:
+        notification(package_data['email'])  # Send email to student
+    except:
+        return 'Could not send email notification.', 500
+    else:
+        db.session.commit()
+        locker.unlock(int(package_data['locker_id']))
 
-    locker.unlock(int(package_data['locker_id']))
     return 'Done', 201
 
 
