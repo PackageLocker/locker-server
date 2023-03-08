@@ -1,8 +1,8 @@
 from flask import Blueprint, jsonify, request, make_response, current_app
 from . import db
 from .models import Package, User
+import datetime as dt
 from datetime import datetime
-import datetime
 from .notification import notification
 # import locker
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -12,6 +12,12 @@ import gspread
 
 main = Blueprint('main', __name__)
 
+# updates google sheet with action message
+def update_sheet(package_data, message):
+    wks = gspread.service_account().open("Knight Pickup Global Database").sheet1
+    wks.insert_row(values=None, index=2)
+    wks.update('A2', [[datetime.now().strftime("%m/%d/%Y, %H:%M:%S"), package_data["locker_id"], package_data["package_id"],
+                       package_data['name'], package_data['student_id'], package_data['email'], message]])
 
 def token_required(f):
     @wraps(f)
@@ -92,7 +98,7 @@ def login():
 
     if check_password_hash(user.password, auth.password):
         token = jwt.encode({
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)},
+            'exp': dt.datetime.utcnow() + dt.timedelta(minutes=30)},
             current_app.config['SECRET_KEY']
         )
 
@@ -114,11 +120,7 @@ def add_package():
     package.timestamp = package_data['timestamp']
     db.session.commit()
 
-    # update google sheet
-    wks = gspread.service_account().open("Global Database").sheet1
-    wks.insert_row(values=None, index=2)
-    wks.update('A2', [[datetime.now().strftime("%m/%d/%Y, %H:%M:%S"), package_data["locker_id"],
-                       package_data['name'], package_data['student_id'], package_data['email'], "DELIVERED"]])
+    update_sheet(package_data=package_data, message="DELIVERED") # Send delivery log message
 
     notification(package_data['email'])  # Send email to student
 
@@ -151,6 +153,7 @@ def packages():
 def update_package():
     package_data = request.get_json()
     package = db.get_or_404(Package, package_data["locker_id"])
+    update_sheet(package_data=package_data, message="DELETED")
     package.package_id = ""
     package.name = ""
     package.student_id = ""
@@ -159,12 +162,6 @@ def update_package():
     package.timestamp = 0
     db.session.commit()
 
-    # update google sheet
-    wks = gspread.service_account().open("Global Database").sheet1
-    wks.insert_row(values=None, index=2)
-    wks.update('A2', [[datetime.now().strftime("%m/%d/%Y, %H:%M:%S"), package_data["locker_id"],
-                       package_data['name'], package_data['student_id'], package_data['email'], "UPDATED"]])
-
     return 'Done', 200
 
 
@@ -172,6 +169,7 @@ def update_package():
 @token_required
 def unlock_locker():
     data = request.get_json()
+    update_sheet(package_data=data, message="RECIEVED")
     # locker.unlock(int(data['locker_id']))
 
     return 'Done', 200
