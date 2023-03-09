@@ -16,15 +16,10 @@ def main():
 
             # look for id in the db
             res = cursor.execute(
-                "select locker_id from packages where student_id = '" + str(id) + "'")
-            locker_ids = res.fetchall()
+                "select * from packages where student_id = '" + str(id) + "'")
+            packages = res.fetchall()
 
-            # get all other information for logs
-            info = cursor.execute(
-                "select * from packages where student_id = '" + str(id) + "' and locker_id = '" + str(locker_ids[0][0]) + "'")
-            packages = info.fetchall()
-
-            if (locker_ids):
+            if (packages):
                 for package in packages:
                     locker_id = package[0]
                     print("locker_id found: #" + str(locker_id))
@@ -37,15 +32,15 @@ def main():
                     connection.commit()
                     print(
                         "[" + str(id) + "] record deleted from locker#" + str(locker_id))
-                    
+
                     # send log message to google sheet
                     wks = gspread.service_account().open("Knight Pickup Global Database").sheet1
                     wks.insert_row(values=None, index=2)
                     wks.update('A2', [[datetime.now().strftime("%m/%d/%Y, %H:%M:%S"), package[0], "RECEIVED", package[0][3],
                                        package[1], package[2], package[4]]])
-                    
+
             else:
-                print("locker_id not found!")
+                print("No package found!")
         except Exception as e:
             print("something went wrong in locker_service...")
             print(e)
