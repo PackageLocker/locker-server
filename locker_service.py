@@ -22,10 +22,10 @@ def main():
             # get all other information for logs
             info = cursor.execute(
                 "select * from packages where student_id = '" + str(id) + "' and locker_id = '" + str(locker_ids[0][0]) + "'")
-            packages = info.fetchall()
+            package_data = info.fetchall()
 
             if (locker_ids):
-                for package in packages:
+                for package in package_data:
                     locker_id = package[0].locker_id
                     print("locker_id found: #" + str(locker_id))
                     locker.unlock(locker_id)
