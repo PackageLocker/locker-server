@@ -16,8 +16,8 @@ main = Blueprint('main', __name__)
 def update_sheet(package_data, message):
     wks = gspread.service_account().open("Knight Pickup Global Database").sheet1
     wks.insert_row(values=None, index=2)
-    wks.update('A2', [[datetime.now().strftime("%m/%d/%Y, %H:%M:%S"), package_data["locker_id"], package_data["package_id"],
-                       package_data['name'], package_data['student_id'], package_data['email'], message]])
+    wks.update('A2', [[datetime.now().strftime("%m/%d/%Y, %H:%M:%S"), package_data["locker_id"], message, package_data['student_id'], 
+                       package_data["package_id"], package_data['name'], package_data['email']]])
 
 def token_required(f):
     @wraps(f)
@@ -153,7 +153,7 @@ def packages():
 def update_package():
     package_data = request.get_json()
     package = db.get_or_404(Package, package_data["locker_id"])
-    update_sheet(package_data=package_data, message="DELETED")
+    update_sheet(package_data=package_data, message="REMOVED") # send log message to google sheet
     package.package_id = ""
     package.name = ""
     package.student_id = ""
@@ -169,7 +169,13 @@ def update_package():
 @token_required
 def unlock_locker():
     data = request.get_json()
-    update_sheet(package_data=data, message="RECIEVED")
+
+    # Send log message to google sheet with empty fields
+    wks = gspread.service_account().open("Knight Pickup Global Database").sheet1
+    wks.insert_row(values=None, index=2)
+    wks.update('A2', [[datetime.now().strftime("%m/%d/%Y, %H:%M:%S"), data["locker_id"], "",
+                       "", "", "", "UNLOCKED"]])
+    
     # locker.unlock(int(data['locker_id']))
 
     return 'Done', 200
