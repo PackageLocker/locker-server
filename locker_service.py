@@ -36,7 +36,7 @@ def main():
                     # send log message to google sheet
                     wks = gspread.service_account().open("Knight Pickup Global Database").sheet1
                     wks.insert_row(values=None, index=2)
-                    wks.update('A2', [[datetime.now().strftime("%m/%d/%Y, %H:%M:%S"), package[0], "RECEIVED", package[0][3],
+                    wks.update('A2', [[datetime.now().strftime("%m/%d/%Y, %H:%M:%S"), package[0], "RECEIVED", package[3],
                                        package[1], package[2], package[4]]])
 
             else:
