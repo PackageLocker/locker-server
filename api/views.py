@@ -103,6 +103,8 @@ def login():
         )
 
         return jsonify({'token': token})
+    else:
+        return 'Could not verify username or password', 401
 
     return 'Could not verify', 401
 
@@ -118,13 +120,17 @@ def add_package():
     package.email = package_data['email']
     package.available = False
     package.timestamp = package_data['timestamp']
-    db.session.commit()
 
     update_sheet(package_data=package_data, message="DELIVERED") # Send delivery log message
 
-    notification(package_data['email'])  # Send email to student
+    try:
+        notification(package_data['email'])  # Send email to student
+    except:
+        return 'Could not send email notification.', 500
+    else:
+        db.session.commit()
+        locker.unlock(int(package_data['locker_id']))
 
-    locker.unlock(int(package_data['locker_id']))
     return 'Done', 201
 
 
