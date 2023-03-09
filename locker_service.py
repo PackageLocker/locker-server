@@ -22,11 +22,11 @@ def main():
             # get all other information for logs
             info = cursor.execute(
                 "select * from packages where student_id = '" + str(id) + "' and locker_id = '" + str(locker_ids[0][0]) + "'")
-            package_data = info.fetchall()
+            packages = info.fetchall()
 
             if (locker_ids):
-                for package in package_data:
-                    locker_id = package[0].locker_id
+                for package in packages:
+                    locker_id = package[0]
                     print("locker_id found: #" + str(locker_id))
                     locker.unlock(locker_id)
                     cursor.execute(
@@ -41,8 +41,8 @@ def main():
                     # send log message to google sheet
                     wks = gspread.service_account().open("Knight Pickup Global Database").sheet1
                     wks.insert_row(values=None, index=2)
-                    wks.update('A2', [[datetime.now().strftime("%m/%d/%Y, %H:%M:%S"), package_data[0][0], "RECEIVED", package_data[0][3], 
-                                    package_data[0][1], package_data[0][2], package_data[0][4]]])
+                    wks.update('A2', [[datetime.now().strftime("%m/%d/%Y, %H:%M:%S"), package[0], "RECEIVED", package[0][3],
+                                       package[1], package[2], package[4]]])
                     
             else:
                 print("locker_id not found!")
