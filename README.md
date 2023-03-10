@@ -84,6 +84,15 @@ python locker_service.py
 	sudo systemctl daemon-reload
 	sudo systemctl enable locker-scanner.service
 	```
+5. Enable Google Sheets API
+	i. For intial setup on a fresh Google Account, follow the following Python Quickstart guide.
+		https://developers.google.com/sheets/api/quickstart/python
+		
+	ii. At https://console.cloud.google.com/apis/credentials, click "Create Credentials" -> "Service Accout"
+		![image](https://user-images.githubusercontent.com/93789336/224417246-e5d87d0a-4198-4f3e-bc8f-e99b648d299a.png)
+	
+	iii. 
+	
 
 ### Useful Debug Commands
 - Start/Stop a service
