@@ -85,13 +85,16 @@ python locker_service.py
 	sudo systemctl enable locker-scanner.service
 	```
 5. Enable Google Sheets API
-	i. For intial setup on a fresh Google Account, follow the following Python Quickstart guide.
-		https://developers.google.com/sheets/api/quickstart/python
-		
-	ii. At https://console.cloud.google.com/apis/credentials, click "Create Credentials" -> "Service Accout"
-		![image](https://user-images.githubusercontent.com/93789336/224417246-e5d87d0a-4198-4f3e-bc8f-e99b648d299a.png)
 	
-	iii. 
+	i. At the following link, select the Service Account associated with this project.
+		https://console.cloud.google.com/apis/credentials?authuser=1&project=team-knight-pickup
+		![image](https://user-images.githubusercontent.com/93789336/224423318-e3ca0943-79d9-4f5c-9a11-801b81feaf88.png)
+
+	ii. Select the "KEYS->ADD KEY->Create new key"
+		![image](https://user-images.githubusercontent.com/93789336/224423614-ca74afd7-b67c-4f4f-9eab-c45e18f3ac24.png)
+		![image](https://user-images.githubusercontent.com/93789336/224423494-0fd937d8-d6e1-48bc-be58-51864d8e858b.png)
+
+
 	
 
 ### Useful Debug Commands
