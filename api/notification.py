@@ -24,7 +24,7 @@ def notification(email_receiver, email_name):
         name_element.string = custom_string
         html_file.close()
     with open("api/email.html", "w") as html_file:
-        html_file.write(str(soup))
+        html_file.write(str(soup.prettify()))
         html_file.close()
 
     # HTML Email Body

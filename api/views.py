@@ -4,7 +4,7 @@ from .models import Package, User
 import datetime as dt
 from datetime import datetime
 from .notification import notification
-import locker
+# import locker
 from werkzeug.security import generate_password_hash, check_password_hash
 import jwt
 from functools import wraps
@@ -127,12 +127,12 @@ def add_package():
     update_sheet(package_data=package_data, message="DELIVERED") # Send delivery log message
 
     try:
-        notification(package_data['email'])  # Send email to student
+        notification(package_data['email'], package_data['name'])  # Send email to student
     except:
         return 'Could not send email notification.', 500
     else:
         db.session.commit()
-        locker.unlock(int(package_data['locker_id']))
+        # locker.unlock(int(package_data['locker_id']))
 
     return 'Done', 201
 
@@ -185,6 +185,6 @@ def unlock_locker():
     wks.update('A2', [[datetime.now().strftime("%m/%d/%Y, %H:%M:%S"), data["locker_id"], "UNLOCKED",
                        "", "", "", ""]])
 
-    locker.unlock(int(data['locker_id']))
+    # locker.unlock(int(data['locker_id']))
 
     return 'Done', 200
