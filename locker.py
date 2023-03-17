@@ -3,9 +3,13 @@ from time import sleep
 
 # change this according to GPIO pinout (format - locker#: pin#)
 LOCKER_GPIO = {
-    1: 36,
-    2: 37,
-    3: 40
+    1: 31,
+    2: 33,
+    3: 35,
+    4: 37,
+    5: 36,
+    6: 38,
+    7: 40
 }
 
 
