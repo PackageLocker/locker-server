@@ -13,8 +13,6 @@ import gspread
 main = Blueprint('main', __name__)
 
 # updates google sheet with action message
-
-
 def update_sheet(package_data, message):
     wks = gspread.service_account().open("Knight Pickup Global Database").sheet1
     wks.insert_row(values=None, index=2)
@@ -127,7 +125,7 @@ def add_package():
     update_sheet(package_data=package_data, message="DELIVERED") # Send delivery log message
 
     try:
-        notification(package_data['email'])  # Send email to student
+        notification(package_data['email'], package_data['name'])  # Send email to student
     except:
         return 'Could not send email notification.', 500
     else:
