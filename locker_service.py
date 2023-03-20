@@ -1,6 +1,6 @@
 # from mfrc522 import SimpleMFRC522
 import sqlite3
-# import locker
+import locker
 import gspread
 from datetime import datetime
 
@@ -11,7 +11,7 @@ def main():
     while True:
         try:
             # scan id
-            # id, text = reader.read()
+            id, text = reader.read()
             print("id: " + str(id))
 
             # look for id in the db
@@ -23,7 +23,7 @@ def main():
                 for package in packages:
                     locker_id = package[0]
                     print("locker_id found: #" + str(locker_id))
-                    # locker.unlock(locker_id)
+                    locker.unlock(locker_id)
                     cursor.execute(
                         "update packages " +
                         "set package_id = '', name = '', student_id = '', email = '', available=True " +
