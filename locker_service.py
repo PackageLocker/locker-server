@@ -1,11 +1,11 @@
-# from mfrc522 import SimpleMFRC522
+from mfrc522 import SimpleMFRC522
 import sqlite3
 import locker
 import gspread
 from datetime import datetime
 
 def main():
-    # reader = SimpleMFRC522()
+    reader = SimpleMFRC522()
     connection = sqlite3.connect('instance/database.db')
     cursor = connection.cursor()
     while True:
